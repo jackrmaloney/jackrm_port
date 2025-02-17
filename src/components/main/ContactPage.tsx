@@ -20,7 +20,7 @@ const Game: React.FC = () => {
   const [highScore, setHighScore] = useState(0);
   const [playerY, setPlayerY] = useState(GAME_HEIGHT - PLAYER_SIZE);
   const [obstacles, setObstacles] = useState<Obstacle[]>([]);
-  const [jumping, setJumping] = useState(false);
+  const [, setJumping] = useState(false);
   const [velocity, setVelocity] = useState(0);
   const [isSpacePressed, setIsSpacePressed] = useState(false);
   const [jumpHoldFrames, setJumpHoldFrames] = useState(0);

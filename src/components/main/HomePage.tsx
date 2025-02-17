@@ -26,7 +26,7 @@ export const HomePage = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
   const [progress, setProgress] = useState(0);
   const [currentExperience, setCurrentExperience] = useState(0);
   const [isChanging, setIsChanging] = useState(false);
-  const [displayContent, setDisplayContent] = useState<React.ReactNode>(null);
+  const [, setDisplayContent] = useState<React.ReactNode>(null);
 
   const experiences = [
     {

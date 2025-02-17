@@ -1,5 +1,4 @@
 // src/App.tsx
-import React from 'react';
 import { ProfileCard } from './components/profile/ProfileCard';
 
 function App() {

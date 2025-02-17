@@ -16,7 +16,7 @@ const StatBlock: React.FC<StatBlockProps> = ({ label, value, subtext }) => (
   </div>
 );
 
-export const StatsSection: React.FC<Stats> = ({ experience, stack, projects }) => {
+export const StatsSection: React.FC<Stats> = ({ experience, projects }) => {
   return (
     <div className="grid grid-cols-3 gap-8 py-8 border-t border-b border-gray-200 my-8">
       <StatBlock 
