@@ -44,11 +44,21 @@ const Game: React.FC = () => {
     setJumpHoldFrames(0);
   };
 
+  const handleInteractionStart = () => {
+    setIsSpacePressed(true);
+    if (!gameStarted || isGameOver) {
+      resetGame();
+    }
+  };
+
+  const handleInteractionEnd = () => {
+    setIsSpacePressed(false);
+  };
+
   useEffect(() => {
     if (!gameStarted || isGameOver) return undefined;
 
     const gameLoop = window.setInterval(() => {
-      // Handle continuous jumping while space is held
       if (isSpacePressed) {
         jump();
       }
@@ -82,28 +92,31 @@ const Game: React.FC = () => {
         return updated;
       });
 
-      // Improved collision detection with smaller hitbox
+      // Improved collision detection that works for both jumping and ground cases
       const playerRect = {
-        x: 50 + 5, // Add small offset for more forgiving hitbox
-        y: playerY + 5,
-        width: PLAYER_SIZE - 10,
-        height: PLAYER_SIZE - 10
+        x: 50,
+        y: playerY,
+        width: PLAYER_SIZE,
+        height: PLAYER_SIZE
       };
 
       const collision = obstacles.some(obstacle => {
         const obstacleRect = {
           x: obstacle.x,
-          y: GAME_HEIGHT - obstacle.height,
+          y: GAME_HEIGHT - obstacle.height+30,
           width: OBSTACLE_WIDTH,
           height: obstacle.height
         };
 
-        return (
+        // Check if player overlaps with obstacle
+        const collides = (
           playerRect.x < obstacleRect.x + obstacleRect.width &&
           playerRect.x + playerRect.width > obstacleRect.x &&
           playerRect.y < obstacleRect.y + obstacleRect.height &&
           playerRect.y + playerRect.height > obstacleRect.y
         );
+
+        return collides;
       });
 
       if (collision) {
@@ -119,43 +132,15 @@ const Game: React.FC = () => {
     return () => window.clearInterval(gameLoop);
   }, [gameStarted, isGameOver, playerY, velocity, obstacles, score, highScore, isSpacePressed, jump]);
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.code === 'Space') {
-        e.preventDefault();
-        setIsSpacePressed(true);
-        if (!gameStarted || isGameOver) {
-          resetGame();
-        }
-      }
-    };
-
-    const handleKeyUp = (e: KeyboardEvent) => {
-      if (e.code === 'Space') {
-        e.preventDefault();
-        setIsSpacePressed(false);
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('keyup', handleKeyUp);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('keyup', handleKeyUp);
-    };
-  }, [gameStarted, isGameOver]);
-
   return (
     <div 
       className="w-full h-48 bg-black/40 backdrop-blur-xl rounded-3xl p-6 relative overflow-hidden cursor-pointer"
-      onMouseDown={() => {
-        setIsSpacePressed(true);
-        if (!gameStarted || isGameOver) {
-          resetGame();
-        }
-      }}
-      onMouseUp={() => setIsSpacePressed(false)}
-      onMouseLeave={() => setIsSpacePressed(false)}
+      onMouseDown={handleInteractionStart}
+      onMouseUp={handleInteractionEnd}
+      onMouseLeave={handleInteractionEnd}
+      onTouchStart={handleInteractionStart}
+      onTouchEnd={handleInteractionEnd}
+      onTouchCancel={handleInteractionEnd}
     >
       <div className="absolute top-4 right-4 text-white">
         Score: {score} | High Score: {highScore}
@@ -163,13 +148,13 @@ const Game: React.FC = () => {
       
       {!gameStarted && !isGameOver && (
         <div className="absolute inset-0 flex items-center justify-center text-white">
-          Click or Press Space to Start
+          Click or Tap to Start
         </div>
       )}
       
       {isGameOver && (
         <div className="absolute inset-0 flex items-center justify-center text-white">
-          Game Over! Click or Press Space to Restart
+          Game Over! Click or Tap to Restart
         </div>
       )}
 
@@ -245,22 +230,20 @@ const Game: React.FC = () => {
 };
 
 export const ContactPage: React.FC = () => {
-  return (
-    <div className="flex flex-col gap-6">
-      <div className="grid grid-cols-2 gap-6">
-        <div className="bg-black/40 backdrop-blur-xl rounded-3xl p-6">
-          <h3 className="text-white text-xl mb-4">PHONE</h3>
-          <p className="text-gray-200">(769) 230 - 5058</p>
+    return (
+      <div className="flex flex-col gap-6">
+        <div className="grid grid-cols-2 gap-6">
+          <div className="bg-black/40 backdrop-blur-xl rounded-3xl p-4">
+            <h3 className="text-white text-xl mb-4">PHONE</h3>
+            <p className="text-gray-200 text-xs sm:text-base">(769) 230 - 5058</p>
+          </div>
+          <div className="bg-black/40 backdrop-blur-xl rounded-3xl p-4">
+            <h3 className="text-white text-xl mb-4">EMAIL</h3>
+            <p className="text-gray-200 text-xs sm:text-base">jackrmaloney09@gmail.com</p>
+          </div>
         </div>
-        <div className="bg-black/40 backdrop-blur-xl rounded-3xl p-6">
-          <h3 className="text-white text-xl mb-4">EMAIL</h3>
-          <p className="text-gray-200">jackrmaloney09@gmail.com</p>
-        </div>
+        
+        <Game />
       </div>
-      
-      <Game />
-    </div>
-  );
-};
-
-export default ContactPage;
+    );
+  };

@@ -38,40 +38,16 @@ export const ProfileCard = () => {
     return false;
   };
 
-  // Add touch event handlers for mobile
-  const handleTouchStart = (e: React.TouchEvent) => {
-    if (scrollContainerRef.current) {
-      setStartX(e.touches[0].pageX - scrollContainerRef.current.offsetLeft);
-      setScrollLeft(scrollContainerRef.current.scrollLeft);
-      setIsDragging(true);
-    }
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging) return;
-    e.preventDefault();
-    
-    if (scrollContainerRef.current) {
-      const x = e.touches[0].pageX - scrollContainerRef.current.offsetLeft;
-      const walk = (x - startX) * 2;
-      scrollContainerRef.current.scrollLeft = scrollLeft - walk;
-    }
-  };
-
-  const handleTouchEnd = () => {
-    setIsDragging(false);
-  };
-
   return (
-    <div className="bg-white rounded-3xl shadow-lg max-w-4xl mx-auto p-8 sm:p-8 p-4">
+    <div className="bg-white rounded-3xl shadow-lg max-w-4xl mx-auto p-4 sm:p-8">
       {/* Header Section */}
-      <div className="flex flex-col sm:flex-row gap-4 sm:gap-8">
+      <div className="flex flex-col sm:flex-row sm:gap-8">
         <img
           src="/images/profPic.jpeg"
           alt="Jack Maloney"
           className="w-32 h-32 sm:w-40 sm:h-40 rounded-3xl object-cover mx-auto sm:mx-0"
         />
-        <div className="flex-1 flex flex-col justify-between h-auto sm:h-40">
+        <div className="flex-1 flex flex-col justify-between mt-4 sm:mt-0 sm:h-40">
           <div className="text-center sm:text-left">
             <h1 className="text-3xl sm:text-4xl font-bold text-black leading-tight">
               JACK MALONEY
@@ -83,7 +59,7 @@ export const ProfileCard = () => {
           <div className="flex justify-center sm:justify-between items-center mt-4 sm:mt-0">
             <button 
               onClick={() => setIsHomeOpen(true)}
-              className="bg-blue-500 text-white px-6 sm:px-8 py-1.5 rounded-full text-base font-semibold hover:bg-blue-600 transition-colors"
+              className="bg-blue-500 text-white px-6 sm:px-8 py-1.5 rounded-full text-sm sm:text-base font-semibold hover:bg-blue-600 transition-colors"
             >
               OPEN
             </button>
@@ -95,9 +71,9 @@ export const ProfileCard = () => {
       </div>
 
       {/* Stats Section */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 mt-8 sm:mt-12 py-6 sm:py-8 border-t border-b border-gray-200 gap-y-6 sm:gap-y-0">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-0 mt-8 sm:mt-12 py-6 sm:py-8 border-t border-b border-gray-200">
         <div className="text-center">
-          <p className="text-gray-400 text-sm font-bold uppercase tracking-wider">
+          <p className="text-gray-400 text-xs sm:text-sm font-bold uppercase tracking-wider">
             EXPERIENCE
           </p>
           <p className="text-3xl sm:text-4xl font-medium text-gray-400 mt-2 mb-1">
@@ -108,7 +84,7 @@ export const ProfileCard = () => {
           </p>
         </div>
         <div className="text-center">
-          <p className="text-gray-400 text-sm font-bold uppercase tracking-wider">
+          <p className="text-gray-400 text-xs sm:text-sm font-bold uppercase tracking-wider">
             STACK
           </p>
           <p className="text-lg sm:text-xl font-medium text-gray-400 mt-2 mb-1">
@@ -119,7 +95,7 @@ export const ProfileCard = () => {
           </p>
         </div>
         <div className="text-center">
-          <p className="text-gray-400 text-sm font-bold uppercase tracking-wider">
+          <p className="text-gray-400 text-xs sm:text-sm font-bold uppercase tracking-wider">
             PROJECTS
           </p>
           <p className="text-3xl sm:text-4xl font-medium text-gray-400 mt-2 mb-1">
@@ -130,7 +106,7 @@ export const ProfileCard = () => {
           </p>
         </div>
         <div className="text-center">
-          <p className="text-gray-400 text-sm font-bold uppercase tracking-wider">
+          <p className="text-gray-400 text-xs sm:text-sm font-bold uppercase tracking-wider">
             LOCATION
           </p>
           <p className="text-3xl sm:text-4xl font-medium text-gray-400 mt-2 mb-1">
@@ -152,9 +128,6 @@ export const ProfileCard = () => {
           onMouseUp={handleMouseUp}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseUp}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
         >
           <div className="flex-none w-[90vw] sm:w-[75vw] md:w-[65vw] lg:w-[580px] aspect-[2320/1440] bg-gray-200 rounded-lg overflow-hidden snap-center border border-gray-200">
             <img 

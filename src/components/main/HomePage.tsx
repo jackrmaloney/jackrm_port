@@ -162,11 +162,11 @@ export const HomePage = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
 
   const renderHomeContent = () => (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mx-auto max-w-2xl">
+      <div className="grid grid-cols-2 gap-3 sm:gap-6 mx-auto max-w-2xl">
         <div className="flex flex-col justify-between h-full">
-          <div className="bg-black/40 backdrop-blur-xl rounded-3xl p-6">
-            <h3 className="text-white text-xl mb-6">SKILLS</h3>
-            <div className="grid grid-cols-3 gap-4">
+          <div className="bg-black/40 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-3 sm:p-6">
+            <h3 className="text-white text-base sm:text-xl mb-2 sm:mb-6">SKILLS</h3>
+            <div className="grid grid-cols-3 gap-2 sm:gap-4">
               {skills.map((skill, index) => {
                 const isUsed = isSkillUsed(skill.name);
                 const isHovered = hoveredSkill === skill.name;
@@ -182,19 +182,19 @@ export const HomePage = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
                   >
                     <div 
                       className={`
-                        backdrop-blur-md rounded-full aspect-square w-16 
-                        flex items-center justify-center mb-2 transform duration-300
+                        backdrop-blur-md rounded-full aspect-square w-10 sm:w-16 
+                        flex items-center justify-center mb-1 sm:mb-2 transform duration-300
                         ${hoveredProject && isUsed ? 'bg-white/90 scale-110' : 'bg-gray-300/50'}
-                        ${!hoveredProject && isHovered ? 'bg-white/90 -translate-y-1' : ''}
+                        ${!hoveredProject && isHovered ? 'bg-white/90 -translate-y-1' : 'bg-gray-300/50'}
                       `}
                     >
                       <img 
                         src={skill.src}
                         alt={skill.name}
-                        className="w-8 h-8"
+                        className="w-5 sm:w-8 h-5 sm:h-8"
                       />
                     </div>
-                    <span className={`text-base text-center transition-colors duration-300 ${
+                    <span className={`text-xs sm:text-base text-center transition-colors duration-300 ${
                       (hoveredProject && isUsed) || (!hoveredProject && isHovered)
                         ? 'text-white'
                         : 'text-gray-200'
@@ -205,93 +205,51 @@ export const HomePage = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
             </div>
           </div>
 
-          <div className="flex justify-between mt-6">
-            <a 
-              href="https://www.linkedin.com/in/jack-r-maloney/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              onClick={(e) => {
-                e.preventDefault();
-                const link = e.currentTarget;
-                link.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                  link.style.transform = 'scale(1)';
-                  window.open(link.href, '_blank');
-                }, 150);
-              }}
-              className="bg-black/40 backdrop-blur-xl rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 transform-gpu"
-            >
-              <Linkedin className="w-8 h-8 text-white" />
-            </a>
-            <a 
-              href="https://github.com/jackrmaloney" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              onClick={(e) => {
-                e.preventDefault();
-                const link = e.currentTarget;
-                link.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                  link.style.transform = 'scale(1)';
-                  window.open(link.href, '_blank');
-                }, 150);
-              }}
-              className="bg-black/40 backdrop-blur-xl rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 transform-gpu"
-            >
-              <Github className="w-8 h-8 text-white" />
-            </a>
-            <a 
-              href="https://x.com/jackrmaloneyy" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              onClick={(e) => {
-                e.preventDefault();
-                const link = e.currentTarget;
-                link.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                  link.style.transform = 'scale(1)';
-                  window.open(link.href, '_blank');
-                }, 150);
-              }}
-              className="bg-black/40 backdrop-blur-xl rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 transform-gpu"
-            >
-              <Twitter className="w-8 h-8 text-white" />
-            </a>
-            <a 
-              href="https://www.instagram.com/jackrmaloneyy/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              onClick={(e) => {
-                e.preventDefault();
-                const link = e.currentTarget;
-                link.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                  link.style.transform = 'scale(1)';
-                  window.open(link.href, '_blank');
-                }, 150);
-              }}
-              className="bg-black/40 backdrop-blur-xl rounded-2xl p-4 transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 transform-gpu"
-            >
-              <Instagram className="w-8 h-8 text-white" />
-            </a>
+          <div className="flex justify-between mt-3 sm:mt-6">
+            {['linkedin', 'github', 'twitter', 'instagram'].map((platform) => (
+              <a 
+                key={platform}
+                href={`https://${platform === 'linkedin' ? 'www.linkedin.com/in/jack-r-maloney' : 
+                  platform === 'github' ? 'github.com/jackrmaloney' :
+                  platform === 'twitter' ? 'x.com/jackrmaloneyy' :
+                  'www.instagram.com/jackrmaloneyy'}`}
+                target="_blank" 
+                rel="noopener noreferrer"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const link = e.currentTarget;
+                  link.style.transform = 'scale(0.95)';
+                  setTimeout(() => {
+                    link.style.transform = 'scale(1)';
+                    window.open(link.href, '_blank');
+                  }, 150);
+                }}
+                className="bg-black/40 backdrop-blur-xl rounded-xl sm:rounded-2xl p-2 sm:p-4 transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 transform-gpu"
+              >
+                {platform === 'linkedin' ? <Linkedin className="w-4 sm:w-8 h-4 sm:h-8 text-white" /> :
+                 platform === 'github' ? <Github className="w-4 sm:w-8 h-4 sm:h-8 text-white" /> :
+                 platform === 'twitter' ? <Twitter className="w-4 sm:w-8 h-4 sm:h-8 text-white" /> :
+                 <Instagram className="w-4 sm:w-8 h-4 sm:h-8 text-white" />}
+              </a>
+            ))}
           </div>
         </div>
 
-        <div className="bg-black/40 backdrop-blur-xl rounded-3xl p-6">
-          <h3 className="text-white text-xl mb-6">iOS PROJECTS</h3>
+        <div className="bg-black/40 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-3 sm:p-6">
+          <h3 className="text-white text-base sm:text-xl mb-2 sm:mb-6">iOS PROJECTS</h3>
           <div className="space-y-0">
             {projects.map((project, index) => (
               <React.Fragment key={project.name}>
                 <div 
-                  className="py-2 transition-all duration-300 ease-in-out transform hover:scale-105"
+                  className="py-1.5 sm:py-2 transition-all duration-300 ease-in-out transform hover:scale-105"
                   onMouseEnter={() => setHoveredProject(project.name)}
                   onMouseLeave={() => setHoveredProject(null)}
                 >
-                  <div className="flex justify-between mb-2">
-                    <h4 className="text-white text-lg">{project.name}</h4>
-                    <span className="text-white">{project.year}</span>
+                  <div className="flex justify-between mb-1 sm:mb-2">
+                    <h4 className="text-white text-sm sm:text-lg">{project.name}</h4>
+                    <span className="text-white text-xs sm:text-base">{project.year}</span>
                   </div>
-                  <p className="text-gray-200">
+                  <p className="text-gray-200 text-xs sm:text-base">
                     {project.description}
                   </p>
                 </div>
@@ -304,12 +262,12 @@ export const HomePage = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
         </div>
       </div>
 
-      <div className="mt-6">
-        <div className="bg-black/40 backdrop-blur-xl rounded-3xl p-6">
-          <h3 className="text-white text-xl mb-4">EXPERIENCE</h3>
+      <div className="mt-3 sm:mt-6">
+        <div className="bg-black/40 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-3 sm:p-6">
+          <h3 className="text-white text-base sm:text-xl mb-2 sm:mb-4">EXPERIENCE</h3>
           
-          <div className="px-16">
-            <div className="rounded-xl overflow-hidden mb-3 max-w-[600px] mx-auto transform transition-all duration-300 hover:scale-105">
+          <div className="px-2 sm:px-16">
+            <div className="rounded-xl overflow-hidden mb-2 sm:mb-3 max-w-[600px] mx-auto transform transition-all duration-300 hover:scale-105">
               <img 
                 src={experiences[currentExperience].image}
                 alt={experiences[currentExperience].title}
@@ -317,35 +275,35 @@ export const HomePage = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
               />
             </div>
             
-            <h4 className="text-white text-lg font-medium">{experiences[currentExperience].title}</h4>
-            <p className="text-gray-200">{experiences[currentExperience].position}</p>
+            <h4 className="text-white text-sm sm:text-lg font-medium">{experiences[currentExperience].title}</h4>
+            <p className="text-gray-200 text-xs sm:text-base">{experiences[currentExperience].position}</p>
             
-            <div className="mt-3 flex items-center gap-2">
-              <span className="text-gray-200 text-sm">{experiences[currentExperience].startDate}</span>
-              <div className="flex-grow h-2 bg-white/20 rounded">
+            <div className="mt-2 sm:mt-3 flex items-center gap-2">
+              <span className="text-gray-200 text-xs sm:text-sm">{experiences[currentExperience].startDate}</span>
+              <div className="flex-grow h-1 sm:h-2 bg-white/20 rounded">
                 <div 
                   className="h-full bg-white/40 rounded transition-all duration-100 ease-linear"
                   style={{ width: `${progress}%` }}
                 ></div>
               </div>
-              <span className="text-gray-200 text-sm">{experiences[currentExperience].endDate}</span>
+              <span className="text-gray-200 text-xs sm:text-sm">{experiences[currentExperience].endDate}</span>
             </div>
             
-            <div className="flex justify-center gap-8 mt-4">
+            <div className="flex justify-center gap-4 sm:gap-8 mt-2 sm:mt-4">
               <button 
-                className="text-white text-3xl transform transition-all duration-300 hover:scale-110 active:scale-90"
+                className="text-white text-xl sm:text-3xl transform transition-all duration-300 hover:scale-110 active:scale-90"
                 onClick={handlePrevious}
               >
                 ⏮
               </button>
               <button 
-                className="text-white text-5xl transform transition-all duration-300 hover:scale-110 active:scale-90"
+                className="text-white text-2xl sm:text-5xl transform transition-all duration-300 hover:scale-110 active:scale-90"
                 onClick={handlePlayPause}
               >
                 {isPlaying ? '⏸' : '▶'}
               </button>
               <button 
-                className="text-white text-3xl transform transition-all duration-300 hover:scale-110 active:scale-90"
+                className="text-white text-xl sm:text-3xl transform transition-all duration-300 hover:scale-110 active:scale-90"
                 onClick={handleNext}
               >
                 ⏭
@@ -376,14 +334,14 @@ export const HomePage = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
     >
       <div className="h-full relative flex flex-col">
         <div className="flex-1 overflow-y-auto">
-          <div className="max-w-3xl mx-auto p-8 pb-16">
+          <div className="max-w-3xl mx-auto p-3 sm:p-8 pb-8 sm:pb-16">
             <NavBar currentPage={currentPage} onPageChange={handlePageChange} />
             
-            <div className="text-center mt-2 mb-6">
-              <h1 className="text-6xl font-black mb-4 text-gray-900">
+            <div className="text-center mt-2 mb-3 sm:mb-6">
+              <h1 className="text-3xl sm:text-6xl font-black mb-1 sm:mb-4 text-gray-900">
                 JACK MALONEY
               </h1>
-              <h2 className="text-2xl font-medium text-gray-900">
+              <h2 className="text-lg sm:text-2xl font-medium text-gray-900">
                 SOFTWARE DEVELOPER
               </h2>
             </div>
@@ -403,10 +361,10 @@ export const HomePage = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
         </div>
   
         <div 
-          className="w-full bg-gradient-to-t from-black/10 to-transparent py-3 flex justify-center cursor-pointer"
+          className="w-full bg-gradient-to-t from-black/10 to-transparent py-1.5 sm:py-3 flex justify-center cursor-pointer"
           onClick={onClose}
         >
-          <div className="w-32 h-1.5 bg-black rounded-full transform transition-transform hover:scale-110" />
+          <div className="w-16 sm:w-32 h-1 sm:h-1.5 bg-black rounded-full transform transition-transform hover:scale-110" />
         </div>
       </div>
     </div>
