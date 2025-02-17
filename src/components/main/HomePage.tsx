@@ -333,7 +333,7 @@ export const HomePage = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
                       flex items-center justify-center mb-1 sm:mb-2 transform duration-300
                       ${hoveredProject && isUsed ? 'bg-white/90 scale-110' : 
                         !hoveredProject && isHovered ? 'bg-white/90 -translate-y-1' : 
-                        'bg-black/1'}
+                        'bg-white/20'}
                     `}
                     >
                       <img 

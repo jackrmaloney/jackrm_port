@@ -37,7 +37,7 @@ export const AboutPage = () => {
           <img 
             src="/images/msu.png"
             alt="MSU Logo"
-            className="w-20 sm:w-40 h-16 sm:h-30"
+            className="w-20 sm:w-40 h-22 sm:h-30"
           />
         </div>
       </div>
