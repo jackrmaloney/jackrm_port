@@ -107,7 +107,7 @@ export const HomePage = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
   const [currentExperience, setCurrentExperience] = useState(0);
   const [isChanging, setIsChanging] = useState(false);
   const [expandedExperience, setExpandedExperience] = useState<number | null>(null);
-  const [displayContent, setDisplayContent] = useState<React.ReactNode>(null);
+  const [, setDisplayContent] = useState<React.ReactNode>(null);
 
   const skills: Skill[] = [
     { name: 'Swift', src: '/images/skill1.png' },
