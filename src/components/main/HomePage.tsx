@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavBar } from '../ui/Navbar';
+import { NavBar } from '../ui/NavBar';
 import { AboutPage } from './AboutPage';
 import { ContactPage } from './ContactPage';
 import { Github, Linkedin, Twitter, Instagram } from 'lucide-react';
