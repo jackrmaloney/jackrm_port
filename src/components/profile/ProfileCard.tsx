@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Share } from 'lucide-react';
+import { FileText, ChevronDown } from 'lucide-react';
 import { HomePage } from '../main/HomePage';
 
 export const ProfileCard = () => {
@@ -8,6 +8,7 @@ export const ProfileCard = () => {
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const [isHomeOpen, setIsHomeOpen] = useState(false);
+  const [resumeOpen, setResumeOpen] = useState(false);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -53,19 +54,46 @@ export const ProfileCard = () => {
               JACK MALONEY
             </h1>
             <h2 className="text-lg sm:text-xl text-gray-500 mt-1">
-              SOFTWARE DEVELOPER
+              Full-Stack Developer & AI Builder
             </h2>
           </div>
-          <div className="flex justify-center sm:justify-between items-center mt-4 sm:mt-0">
-            <button 
+          <div className="flex justify-center sm:justify-between items-center mt-4 sm:mt-0 gap-3">
+            <button
               onClick={() => setIsHomeOpen(true)}
               className="bg-blue-500 text-white px-6 sm:px-8 py-1.5 rounded-full text-sm sm:text-base font-semibold hover:bg-blue-600 transition-colors"
             >
               OPEN
             </button>
-            <button className="text-blue-500 hover:text-blue-600 transition-colors ml-4">
-              <Share size={24} />
-            </button>
+            <div className="relative">
+              <button
+                onClick={() => setResumeOpen(!resumeOpen)}
+                className="text-blue-500 hover:text-blue-600 transition-colors flex items-center gap-1"
+              >
+                <FileText size={24} />
+                <ChevronDown size={14} className={`transition-transform ${resumeOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {resumeOpen && (
+                <div className="absolute right-0 top-full mt-2 bg-white rounded-xl shadow-lg border border-gray-200 py-2 w-44 z-50">
+                  <a
+                    href="/resume.pdf"
+                    download
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                    onClick={() => setResumeOpen(false)}
+                  >
+                    Download Resume
+                  </a>
+                  <a
+                    href="/resume.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                    onClick={() => setResumeOpen(false)}
+                  >
+                    View Resume
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -77,7 +105,7 @@ export const ProfileCard = () => {
             EXPERIENCE
           </p>
           <p className="text-3xl sm:text-4xl font-medium text-gray-400 mt-2 mb-1">
-            2+
+            4+
           </p>
           <p className="text-gray-400 text-sm sm:text-base">
             Years
@@ -99,10 +127,10 @@ export const ProfileCard = () => {
             PROJECTS
           </p>
           <p className="text-3xl sm:text-4xl font-medium text-gray-400 mt-2 mb-1">
-            2
+            5+
           </p>
           <p className="text-gray-400 text-sm sm:text-base">
-            Live Apps
+            Projects
           </p>
         </div>
         <div className="text-center">
@@ -110,10 +138,10 @@ export const ProfileCard = () => {
             LOCATION
           </p>
           <p className="text-3xl sm:text-4xl font-medium text-gray-400 mt-2 mb-1">
-            AL
+            FL
           </p>
           <p className="text-gray-400 text-sm sm:text-base">
-            United States
+            Orlando
           </p>
         </div>
       </div>
