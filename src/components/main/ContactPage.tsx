@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { Copy, Check } from 'lucide-react';
 
 interface Obstacle {
   x: number;
@@ -230,20 +231,76 @@ const Game: React.FC = () => {
 };
 
 export const ContactPage: React.FC = () => {
-    return (
-      <div className="flex flex-col gap-6">
-        <div className="grid grid-cols-2 gap-6">
-          <div className="bg-black/40 backdrop-blur-xl rounded-3xl p-4">
-            <h3 className="text-white text-xl mb-4">PHONE</h3>
-            <p className="text-gray-200 text-xs sm:text-base">(769) 230 - 5058</p>
-          </div>
-          <div className="bg-black/40 backdrop-blur-xl rounded-3xl p-4">
-            <h3 className="text-white text-xl mb-4">EMAIL</h3>
-            <p className="text-gray-200 text-xs sm:text-base">jackrmaloney09@gmail.com</p>
-          </div>
-        </div>
-        
-        <Game />
-      </div>
-    );
+  const [phoneRevealed, setPhoneRevealed] = useState(false);
+  const [emailRevealed, setEmailRevealed] = useState(false);
+  const [phoneCopied, setPhoneCopied] = useState(false);
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  const copyToClipboard = (text: string, type: 'phone' | 'email') => {
+    navigator.clipboard.writeText(text);
+    if (type === 'phone') {
+      setPhoneCopied(true);
+      setTimeout(() => setPhoneCopied(false), 2000);
+    } else {
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2000);
+    }
   };
+
+  return (
+    <div className="flex flex-col gap-6">
+      <div className="grid grid-cols-2 gap-4 sm:gap-6">
+        <div className="bg-black/40 backdrop-blur-xl rounded-3xl p-4 sm:p-6">
+          <h3 className="text-white text-base sm:text-xl mb-3 sm:mb-4">PHONE</h3>
+          {!phoneRevealed ? (
+            <button
+              onClick={() => setPhoneRevealed(true)}
+              className="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:scale-105 active:scale-95 w-full"
+            >
+              Call Me
+            </button>
+          ) : (
+            <div className="flex items-center gap-2">
+              <a href="tel:+17692305058" className="text-gray-200 text-xs sm:text-sm hover:text-white transition-colors">
+                (769) 230-5058
+              </a>
+              <button
+                onClick={() => copyToClipboard('7692305058', 'phone')}
+                className="text-gray-400 hover:text-white transition-colors flex-shrink-0"
+              >
+                {phoneCopied ? <Check size={14} /> : <Copy size={14} />}
+              </button>
+              {phoneCopied && <span className="text-emerald-400 text-xs">Copied!</span>}
+            </div>
+          )}
+        </div>
+        <div className="bg-black/40 backdrop-blur-xl rounded-3xl p-4 sm:p-6">
+          <h3 className="text-white text-base sm:text-xl mb-3 sm:mb-4">EMAIL</h3>
+          {!emailRevealed ? (
+            <button
+              onClick={() => setEmailRevealed(true)}
+              className="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:scale-105 active:scale-95 w-full"
+            >
+              Email Me
+            </button>
+          ) : (
+            <div className="flex items-center gap-2">
+              <a href="mailto:jackrmaloney09@gmail.com" className="text-gray-200 text-xs sm:text-sm hover:text-white transition-colors break-all">
+                jackrmaloney09@gmail.com
+              </a>
+              <button
+                onClick={() => copyToClipboard('jackrmaloney09@gmail.com', 'email')}
+                className="text-gray-400 hover:text-white transition-colors flex-shrink-0"
+              >
+                {emailCopied ? <Check size={14} /> : <Copy size={14} />}
+              </button>
+              {emailCopied && <span className="text-emerald-400 text-xs">Copied!</span>}
+            </div>
+          )}
+        </div>
+      </div>
+
+      <Game />
+    </div>
+  );
+};
