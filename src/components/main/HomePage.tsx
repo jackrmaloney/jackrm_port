@@ -30,44 +30,48 @@ type ExperienceDetail = {
 
 const experienceDetails: ExperienceDetail[] = [
   {
-    image: '/images/welcomeConnectU.png',
-    title: 'connectU',
-    position: 'Co founder, Director of Technology',
-    startDate: 'Jan 2024',
-    endDate: 'Present',
-    skills: ['Swift', 'React', 'Firebase', 'Node.js', 'UIKit'],
-    description: [
-      'Led the development team',
-      'Built the front end using UIKit and developed a scalable Node.js backend',
-      'Integrated Facebook and Stripe APIs for authentication and payment processing',
-      'Launched the app on iOS, handling architecture, deployment, and growth strategy'
-    ]
-  },
-  {
     image: '/images/nexer.png',
     title: 'Nexer',
     position: 'Associate Technical Consultant',
-    startDate: 'Aug 2024',
-    endDate: 'Present',
-    skills: ['X++', 'D365 F&O', 'SQL'],
+    startDate: 'July 2024',
+    endDate: 'April 2026',
+    skills: ['X++', 'D365 F&O', 'SQL', 'OData', 'MCP'],
     description: [
-      'Developed and optimized custom business logic in X++ for Dynamics 365',
-      'Worked with enterprise application development, API integrations, and system design',
-      'Configured and deployed SFTP servers for secure data transfer'
+      'Solutioned and deployed SFTP server integration with D365 F&O, automating client attachment transfers',
+      'Developed OData-based RESTful APIs to route F&O data to Quadient for document generation',
+      'Built warehouse management customizations for ASN project with pallet consolidation',
+      'Leveraged MCP to create legal entities and generate functional design documents',
+      'Designed custom data migration packages using the Data Management Framework'
+    ]
+  },
+  {
+    image: '/images/welcomeConnectU.png',
+    title: 'connectU',
+    position: 'Director of Technology & Lead iOS Developer',
+    startDate: 'Jan 2024',
+    endDate: 'Present',
+    skills: ['Swift', 'UIKit', 'Node.js', 'Firebase', 'Stripe'],
+    description: [
+      'Architected a cross-functional mobile platform in Swift/UIKit with Node.js/Express backend',
+      'Led end-to-end product development through a competitive startup accelerator',
+      'Managed hiring and performance decisions for the engineering team',
+      'Implemented secure RESTful API endpoints with Stripe and Facebook OAuth',
+      'Presented product demos and technical architecture to investors'
     ]
   },
   {
     image: '/images/belt.png',
     title: 'Beltservice Corporation',
-    position: 'Jr. Software Developer',
+    position: 'Jr. Developer',
     startDate: 'Aug 2023',
     endDate: 'July 2024',
-    skills: ['X++', 'D365 F&O', 'SQL'],
+    skills: ['X++', 'D365 F&O', 'SQL', 'SSRS'],
     description: [
-      'Performed post go-live Dynamics 365 Finance & Operations support',
-      'Leveraged out-of-the-box features in F&O',
-      'Completely redesigned various high traffic modules within F&O',
-      'Followed the Agile development life cycle'
+      'Created custom SSRS reports for business intelligence across D365 modules',
+      'Developed custom forms and tables for the warehousing module',
+      'Implemented batch processing with SysOperations framework for async operations',
+      'Performed post go-live D365 F&O support and troubleshooting',
+      'Extended procurement module with custom validation logic'
     ]
   },
   {
@@ -76,24 +80,25 @@ const experienceDetails: ExperienceDetail[] = [
     position: 'AI Researcher',
     startDate: 'April 2023',
     endDate: 'Oct 2023',
-    skills: ['Python', 'Rust', 'TensorFlow', 'PyTorch'],
+    skills: ['Python', 'PyTorch', 'Deep Learning'],
     description: [
       'Researched deep neural networks from an entropy perspective',
-      'Discovered that when training MLP models using entropy values as weights, there is a result in quicker and more accurate training times',
-      'Used RStudio and Python to create data visualizations'
+      'Discovered that training MLP models using entropy values as weights results in faster and more accurate training',
+      'Implemented experimental training pipelines across multiple network architectures'
     ]
   },
   {
     image: '/images/enVista.png',
     title: 'enVista',
-    position: 'Software Development Intern',
+    position: 'Technical Intern',
     startDate: 'May 2022',
-    endDate: 'March 2023',
-    skills: ['X++', 'D365 F&O', 'SQL'],
+    endDate: 'May 2023',
+    skills: ['X++', 'D365 F&O', 'SQL', 'SysTest'],
     description: [
-      'Assisted in developing client-facing applications',
-      'Participated in agile development processes',
-      'Learned and implemented D365 industry best practices'
+      'Refactored forms in D365 F&O to improve usability and maintainability',
+      'Created custom data entities for data migration and integration',
+      'Participated in technical architecting for D365 F&O implementations',
+      'Built automated unit and regression tests using the SysTest framework'
     ]
   }
 ];
@@ -120,6 +125,18 @@ export const HomePage = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
 
   const projects: Project[] = [
     {
+      name: 'Alan',
+      year: '2025',
+      description: 'Behavioral AI coaching app with knowledge graphs and multi-model AI backend.',
+      skills: ['Swift', 'UIKit', 'Firebase', 'Node.js', 'TypeScript']
+    },
+    {
+      name: 'Hummingbird Drone',
+      year: '2025',
+      description: 'Real-time ground control station for autonomous drone operations.',
+      skills: ['React', 'TypeScript', 'Node.js']
+    },
+    {
       name: 'PayAway',
       year: '2025',
       description: 'Minimalistic debt planner and tracker.',
@@ -132,11 +149,11 @@ export const HomePage = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
       skills: ['Swift', 'UIKit', 'Node.js', 'Firebase', 'React', 'TypeScript']
     },
     {
-      name: 'miniFolio',
-      year: 'In Development',
-      description: 'Minimalistic stock portfolio tracker.',
-      skills: ['Swift', 'Node.js', 'Firebase', 'UIKit']
-    }
+      name: 'TraderRank',
+      year: '2025',
+      description: 'Real-time trading matches, leaderboards, and StoreKit 2 subscriptions.',
+      skills: ['Swift', 'UIKit', 'Firebase']
+    },
   ];
 
   const handleExperienceClick = (index: number) => {
@@ -384,7 +401,7 @@ export const HomePage = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
         </div>
 
         <div className="bg-black/40 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-3 sm:p-6">
-          <h3 className="text-white text-base sm:text-xl mb-2 sm:mb-6">iOS PROJECTS</h3>
+          <h3 className="text-white text-base sm:text-xl mb-2 sm:mb-6">PROJECTS</h3>
           <div className="space-y-0">
             {projects.map((project, index) => (
               <React.Fragment key={project.name}>
@@ -443,7 +460,7 @@ export const HomePage = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
                 JACK MALONEY
               </h1>
               <h2 className="text-lg sm:text-2xl font-medium text-gray-900">
-                SOFTWARE DEVELOPER
+                Full-Stack Developer & AI Builder
               </h2>
             </div>
       
