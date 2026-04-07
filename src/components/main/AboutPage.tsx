@@ -57,7 +57,7 @@ export const AboutPage = () => {
               <ul className="space-y-1 sm:space-y-2 text-xs sm:text-base">
                 <li>• I am 23 years old</li>
                 <li>• I have over 3 years of development experience</li>
-                <li>• I am currently based out of AL</li>
+                <li>• I am currently based out of Orlando, FL</li>
                 <li>• I love rewatching TV shows</li>
                 <li>• I am always building new things</li>
               </ul>
