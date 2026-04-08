@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { FileText, ChevronDown } from 'lucide-react';
+import { FileText, ChevronDown, X } from 'lucide-react';
 import { HomePage } from '../main/HomePage';
 
 export const ProfileCard = () => {
@@ -9,6 +9,7 @@ export const ProfileCard = () => {
   const [scrollLeft, setScrollLeft] = useState(0);
   const [isHomeOpen, setIsHomeOpen] = useState(false);
   const [resumeOpen, setResumeOpen] = useState(false);
+  const [resumeViewOpen, setResumeViewOpen] = useState(false);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -82,15 +83,12 @@ export const ProfileCard = () => {
                   >
                     Download Resume
                   </a>
-                  <a
-                    href="/resume.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                    onClick={() => setResumeOpen(false)}
+                  <button
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                    onClick={() => { setResumeOpen(false); setResumeViewOpen(true); }}
                   >
                     View Resume
-                  </a>
+                  </button>
                 </div>
               )}
             </div>
@@ -178,10 +176,36 @@ export const ProfileCard = () => {
         </div>
       </div>
 
-      <HomePage 
-        isOpen={isHomeOpen} 
-        onClose={() => setIsHomeOpen(false)} 
+      <HomePage
+        isOpen={isHomeOpen}
+        onClose={() => setIsHomeOpen(false)}
       />
+
+      {/* Resume Viewer Modal */}
+      {resumeViewOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8"
+          onClick={() => setResumeViewOpen(false)}
+        >
+          <div className="absolute inset-0 bg-white/30 backdrop-blur-xl" />
+          <div
+            className="relative w-full max-w-4xl h-[85vh] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setResumeViewOpen(false)}
+              className="absolute top-3 right-3 z-10 bg-black/40 backdrop-blur-md text-white rounded-full p-2 hover:bg-black/60 transition-colors"
+            >
+              <X size={20} />
+            </button>
+            <iframe
+              src="/resume.pdf"
+              className="w-full h-full border-0"
+              title="Resume"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

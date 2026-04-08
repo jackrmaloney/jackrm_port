@@ -8,7 +8,8 @@ type Page = 'home' | 'about' | 'contact';
 
 type Skill = {
   name: string;
-  src: string;
+  src?: string;
+  label?: string;
 };
 
 type Project = {
@@ -120,7 +121,13 @@ export const HomePage = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
     { name: 'Firebase', src: '/images/skill3.png' },
     { name: 'Node.js', src: '/images/skill4.png' },
     { name: 'UIKit', src: '/images/skill5.png' },
-    { name: 'TypeScript', src: '/images/skill6.png' }
+    { name: 'TypeScript', src: '/images/skill6.png' },
+    { name: 'Python', label: 'Py' },
+    { name: 'C#', label: 'C#' },
+    { name: 'SQL', label: 'SQL' },
+    { name: 'Docker', label: '🐳' },
+    { name: 'AI', label: 'AI' },
+    { name: 'Angular', label: 'Ng' },
   ];
 
   const projects: Project[] = [
@@ -128,31 +135,31 @@ export const HomePage = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
       name: 'Alan',
       year: '2025',
       description: 'Behavioral AI coaching app with knowledge graphs and multi-model AI backend.',
-      skills: ['Swift', 'UIKit', 'Firebase', 'Node.js', 'TypeScript']
+      skills: ['Swift', 'UIKit', 'Firebase', 'Node.js', 'TypeScript', 'Python', 'AI', 'Docker']
     },
     {
       name: 'Hummingbird Drone',
       year: '2025',
       description: 'Real-time ground control station for autonomous drone operations.',
-      skills: ['React', 'TypeScript', 'Node.js']
+      skills: ['React', 'TypeScript', 'Node.js', 'Python', 'Docker', 'AI']
     },
     {
       name: 'PayAway',
       year: '2025',
       description: 'Minimalistic debt planner and tracker.',
-      skills: ['Swift', 'UIKit', 'Firebase']
+      skills: ['Swift', 'UIKit', 'Firebase', 'Node.js', 'SQL']
     },
     {
       name: 'connectU',
       year: '2024',
       description: 'Marketplace for college students to find brand deals.',
-      skills: ['Swift', 'UIKit', 'Node.js', 'Firebase', 'React', 'TypeScript']
+      skills: ['Swift', 'UIKit', 'Node.js', 'Firebase', 'React', 'TypeScript', 'Docker']
     },
     {
       name: 'TraderRank',
       year: '2025',
       description: 'Real-time trading matches, leaderboards, and StoreKit 2 subscriptions.',
-      skills: ['Swift', 'UIKit', 'Firebase']
+      skills: ['Swift', 'UIKit', 'Firebase', 'Node.js', 'AI', 'SQL', 'Docker']
     },
   ];
 
@@ -344,20 +351,28 @@ export const HomePage = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
                     onMouseEnter={() => !hoveredProject && setHoveredSkill(skill.name)}
                     onMouseLeave={() => setHoveredSkill(null)}
                   >
-                    <div 
+                    <div
                       className={`
-                      backdrop-blur-md rounded-full aspect-square w-10 sm:w-16 
+                      backdrop-blur-md rounded-full aspect-square w-10 sm:w-16
                       flex items-center justify-center mb-1 sm:mb-2 transform duration-300
-                      ${hoveredProject && isUsed ? 'bg-white/90 scale-110' : 
-                        !hoveredProject && isHovered ? 'bg-white/90 -translate-y-1' : 
+                      ${hoveredProject && isUsed ? 'bg-white/90 scale-110' :
+                        !hoveredProject && isHovered ? 'bg-white/90 -translate-y-1' :
                         'bg-white/20'}
                     `}
                     >
-                      <img 
-                        src={skill.src}
-                        alt={skill.name}
-                        className="w-5 sm:w-8 h-5 sm:h-8"
-                      />
+                      {skill.src ? (
+                        <img
+                          src={skill.src}
+                          alt={skill.name}
+                          className="w-5 sm:w-8 h-5 sm:h-8"
+                        />
+                      ) : (
+                        <span className={`text-xs sm:text-sm font-bold transition-colors duration-300 ${
+                          (hoveredProject && isUsed) || (!hoveredProject && isHovered)
+                            ? 'text-gray-900'
+                            : 'text-white'
+                        }`}>{skill.label}</span>
+                      )}
                     </div>
                     <span className={`text-xs sm:text-base text-center transition-colors duration-300 ${
                       (hoveredProject && isUsed) || (!hoveredProject && isHovered)
